@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personne {% endblock %}
+
+{% block body %}
+    <h1>Personne </h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-dark">
+                <th scope="row">Id</th>
+                <th scope="row">Nom</th>
+                <th scope="row">Date_nais</th>
+                <th scope="row">Cin</th>
+                <th scope="row">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for personne in personnes %}
+            <tr>
+                <td>{{ personne.id }}</td>
+                <td>{{ personne.nom }}</td>
+                <td>{{ personne.dateNais ? personne.dateNais|date('Y-m-d') : '' }}</td>
+                <td>{{ personne.cin }}</td>
+                <td>
+                    <a href="{{ path('app_personne_show', {'id': personne.id}) }}">show</a>
+                    <a href="{{ path('app_personne_edit', {'id': personne.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_personne_new') }}">Create new</a>
+{% endblock %}
